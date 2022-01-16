@@ -44,10 +44,10 @@ class Solution:
         start, g, i = 0, 0, 0   #start 起点；g 剩余油量
 
         while True :
-            g = g + gas[i] - cost[i]    #开往下一站
+            g = g + gas[i] - cost[i]    #在本站加油，并开往下一站
             i = nextStation(i)
 
-            if g < 0 :   #进站后油量不足，abs(g)就是油的缺口
+            if g < 0 :   #进站后油量不足，尝试向前移动起点，试图补足油的缺口
                 start = lastStation(start)
                 g = g + gas[start] - cost[start]
                 while g < 0 :
