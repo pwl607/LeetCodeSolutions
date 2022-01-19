@@ -4,20 +4,19 @@ class Solution:
     def breakfastNumber(self, staple: List[int], drinks: List[int], x: int) -> int:
         staple.sort()
         drinks.sort()
-        while staple[-1] > x :
-            staple.pop(-1)
-        while drinks[-1] > x :
-            drinks.pop(-1)
-        if len(staple) > len(drinks):
-            staple, drinks = drinks, staple
-        print(staple, drinks)
-        for i in range(1,len(staple) + 1) :
-            staple[-i]
-        return 0
+        ns, nd = len(staple), len(drinks)
+        ks, kd = 0, nd - 1
+        res = 0
+        while ks < ns and kd >= 0 :
+            while kd >=0 and staple[ks] + drinks[kd] > x :
+                kd -= 1
+            res = (res + (kd + 1)) % 1000000007
+            ks += 1
+        return res
 
 
-staple = [10,20,5]
-drinks = [5,5,2]
-x = 15
+staple = [2,1,1]
+drinks = [9,8,5,1]
+x = 9
 print(Solution().breakfastNumber(staple, drinks, x))
 
